@@ -46,7 +46,7 @@ class EventController extends ControllerBase {
       if (empty($data)) {
         throw new \Exception('Missing data');
       }
-      $file = file_save_data($data, 'public://' . uniqid('brilleappen_', TRUE) . '.jpg', FILE_EXISTS_REPLACE);
+      $file = file_save_data($data, 'public://' . uniqid('brilleappen_' . strftime('%Y%m%dT%H%M%S') . '_') . '.jpg', FILE_EXISTS_REPLACE);
 
       $node->field_gg_files->appendItem($file);
       $node->save();
