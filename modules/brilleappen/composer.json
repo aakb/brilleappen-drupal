@@ -1,5 +1,6 @@
 {
     "require": {
-        "mgp25/instagram-php": "^1.0"
+        "mgp25/instagram-php": "^1.0",
+        "abraham/twitteroauth": "^0.6.2"
     }
 }
