@@ -12,12 +12,12 @@ use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Drupal\Core\Database\Query\Condition;
 
-class FileController extends ControllerBase {
+class EventController extends ControllerBase {
   /**
    * @param \Symfony\Component\HttpFoundation\Request $request
    * @param string $event
    */
-  public function main(Request $request, $event = '') {
+  public function file(Request $request, $event = '') {
     try {
       if ($request->getMethod() != 'POST') {
         throw new \Exception('Invalid request');

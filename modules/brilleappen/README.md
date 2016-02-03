@@ -18,5 +18,5 @@ curl --silent 'http://brilleappen.vm/node/1?_format=xml'
 Add file to event (with uuid d859ba64-c730-44fa-bb00-d2837e41720d):
 
 ```
-curl --silent --location 'http://lorempixel.com/400/400/' | curl --request POST --user rest:rest --data-binary @- http://brilleappen.vm/brilleappen/file/d859ba64-c730-44fa-bb00-d2837e41720d
+curl --silent --location 'http://lorempixel.com/400/400/' | curl --request POST --user rest:rest --data-binary @- http://brilleappen.vm/brilleappen/event/d859ba64-c730-44fa-bb00-d2837e41720d/file
 ```

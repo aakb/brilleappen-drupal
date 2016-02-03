@@ -1,11 +1,12 @@
 brilleappen.file:
-  path: '/brilleappen/file/{event}'
+  path: '/brilleappen/event/{event}/file'
   options:
     _auth: [ 'basic_auth' ]
   requirements:
     _user_is_logged_in: 'TRUE'
+    _method: 'POST'
   defaults:
-    _controller: '\Drupal\brilleappen\Controller\FileController::main'
+    _controller: '\Drupal\brilleappen\Controller\EventController::file'
     _title: 'File'
   requirements:
     _permission: 'access content'
