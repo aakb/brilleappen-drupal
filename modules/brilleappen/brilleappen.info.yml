@@ -1,0 +1,6 @@
+name: Brilleappen
+description:
+package: Custom
+
+type: module
+core: 8.x

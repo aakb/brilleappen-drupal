@@ -1,0 +1,11 @@
+brilleappen.file:
+  path: '/brilleappen/file/{event}'
+  options:
+    _auth: [ 'basic_auth' ]
+  requirements:
+    _user_is_logged_in: 'TRUE'
+  defaults:
+    _controller: '\Drupal\brilleappen\Controller\FileController::main'
+    _title: 'File'
+  requirements:
+    _permission: 'access content'
