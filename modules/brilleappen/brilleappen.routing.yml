@@ -1,5 +1,5 @@
 brilleappen.file:
-  path: '/brilleappen/event/{event}/file'
+  path: '/brilleappen/event/{event_id}/file'
   options:
     _auth: [ 'basic_auth' ]
   requirements:

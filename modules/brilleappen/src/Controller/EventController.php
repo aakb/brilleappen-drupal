@@ -16,14 +16,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Drupal\Core\Database\Query\Condition;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
+use Symfony\Component\Validator\Constraints\False;
 
 
 class EventController extends ControllerBase {
   /**
    * @param \Symfony\Component\HttpFoundation\Request $request
-   * @param string $event
+   * @param string $event_id
    */
-  public function file(Request $request, $event = '') {
+  public function file(Request $request, $event_id = '') {
     try {
       if ($request->getMethod() != 'POST') {
         throw new \Exception('Invalid request');
@@ -31,17 +32,17 @@ class EventController extends ControllerBase {
 
       $query = \Drupal::entityQuery('node')
              ->condition('type', 'gg_event', '=')
-             ->condition('uuid', $event, '=');
+             ->condition('uuid', $event_id, '=');
 
       $entityIds = $query->execute();
       if (count($entityIds) != 1) {
-        throw new \Exception('No such event: ' . $event);
+        throw new \Exception('No such event: ' . $event_id);
       }
       $entityId = array_shift($entityIds);
-      $node = Node::load($entityId);
+      $event = Node::load($entityId);
 
-      if (!$node) {
-        throw new \Exception('No such event: ' . $event);
+      if (!$event) {
+        throw new \Exception('No such event: ' . $event_id);
       }
 
       // Get posted data and save it in a file.
@@ -51,19 +52,28 @@ class EventController extends ControllerBase {
       }
       $file = file_save_data($data, 'public://' . uniqid('brilleappen_' . strftime('%Y%m%dT%H%M%S') . '_') . '.jpg', FILE_EXISTS_REPLACE);
 
-      $node->field_gg_files->appendItem($file);
-      $node->save();
+      $event->field_gg_files->appendItem($file);
+      $event->save();
+
+      // Create a new Media node.
+      $media = Node::create([
+        'type' => 'gg_media',
+        'title' => strftime('%Y-%m-%dT%H:%M:%S'),
+        'field_gg_event' => $event->nid->value,
+        'field_gg_file' => $file->fid->value,
+      ]);
+      $media->save();
 
       // @TODO Handle this in a queue with retries and stuff …
-      $pushMessages = $this->push($file, $node);
+      $pushMessages = $this->push($file, $event, $media);
 
-      $this->sendResponse([ 'status' => 'OK', 'message' => 'File added to event "' . $node->getTitle() . '"', 'pushMessages' => $pushMessages ]);
+      $this->sendResponse([ 'status' => 'OK', 'message' => 'Media added to event "' . $event->getTitle() . '"', 'pushMessages' => $pushMessages ]);
     } catch (\Exception $ex) {
       $this->sendResponse([ 'status' => 'ERROR', 'message' => $ex->getMessage(), 'type' => get_class($ex) ], 400);
     }
   }
 
-  private function push(File $file, Node $event) {
+  private function push(File $file, Node $event, Node $media) {
     $messages = [];
 
     $filepath = \Drupal::service('file_system')->realpath($file->getFileUri());
@@ -122,7 +132,21 @@ class EventController extends ControllerBase {
       }
     }
 
+    $this->addMediaData($media, [ 'push_messages' => $messages ]);
+
     return $messages;
+  }
+
+  private function addMediaData(Node $media, array $data, $save = TRUE) {
+    $value = @json_decode($media->field_gg_data->value);
+    if (!is_array($value)) {
+      $value = [];
+    }
+    $value += $data;
+    $media->field_gg_data = json_encode($value);
+    if ($save) {
+      $media->save();
+    }
   }
 
   private function sendResponse($data, $code = 200) {
