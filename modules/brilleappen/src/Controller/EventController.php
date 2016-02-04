@@ -12,6 +12,7 @@ use Drupal\node\Entity\Node;
 use Drupal\file\Entity\File;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Session\AccountInterface;
+use Symfony\Component\HttpFoundation\File\MimeType\ExtensionGuesser;
 use Symfony\Component\HttpFoundation\Request;
 use Drupal\Core\Database\Query\Condition;
 
@@ -50,7 +51,8 @@ class EventController extends ControllerBase {
       if (empty($data)) {
         throw new \Exception('Missing data');
       }
-      $file = file_save_data($data, 'public://' . uniqid('brilleappen_' . strftime('%Y%m%dT%H%M%S') . '_') . '.jpg', FILE_EXISTS_REPLACE);
+      $filename = uniqid('brilleappen_' . strftime('%Y%m%dT%H%M%S') . '_') . '.' . ExtensionGuesser::getInstance()->guess($request->get('type'));
+      $file = file_save_data($data, 'public://' . $filename, FILE_EXISTS_REPLACE);
 
       $event->field_gg_files->appendItem($file);
       $event->save();
@@ -64,10 +66,9 @@ class EventController extends ControllerBase {
       ]);
       $media->save();
 
-      // @TODO Handle this in a queue with retries and stuff …
-      $pushMessages = $this->push($file, $event, $media);
+      $shareMessages = ($request->get('share') == 'yes') ? $this->push($file, $event, $media) : NULL;
 
-      $this->sendResponse([ 'status' => 'OK', 'message' => 'Media added to event "' . $event->getTitle() . '"', 'pushMessages' => $pushMessages ]);
+      $this->sendResponse([ 'status' => 'OK', 'message' => 'Media added to event "' . $event->getTitle() . '"', 'shareMessages' => $shareMessages ]);
     } catch (\Exception $ex) {
       $this->sendResponse([ 'status' => 'ERROR', 'message' => $ex->getMessage(), 'type' => get_class($ex) ], 400);
     }
