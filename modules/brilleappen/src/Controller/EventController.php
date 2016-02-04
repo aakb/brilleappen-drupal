@@ -94,11 +94,11 @@ class EventController extends ControllerBase {
           throw new \Exception($content->errors[0]->message);
         }
 
-        $media = $connection->upload('media/upload', ['media' => $filepath ]);
+        $upload = $connection->upload('media/upload', ['media' => $filepath ]);
 
         $statuses = $connection->post('statuses/update', [
           'status' => $caption,
-          'media_ids' => $media->media_id_string,
+          'media_ids' => $upload->media_id_string,
         ]);
 
         $messages['twitter'] = 'OK';
