@@ -3,6 +3,7 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Endroid\QrCode\QrCode;
+use Drupal\core\Url;
 
 /**
  * @file
@@ -25,26 +26,18 @@ function brilleappen_preprocess_node(array &$variables) {
 
 function brilleappen_preprocess_node_gg_event(array &$variables) {
   $event = $variables['node'];
-  $url = \Drupal\core\Url::fromRoute('brilleappen.file', [ 'event_id' => $event->uuid->value ], [ 'absolute' => true ]);
+  $url = Url::fromRoute('<current>', [ '_format' => 'json' ], [ 'absolute' => TRUE ]);
 
-  $data = [
-    'url' => $url->toString(),
-    'username' => 'rest',
-    'password' => 'rest',
-    'caption' => [
-      'instagram' => $event->field_gg_instagram_caption->value,
-      'twitter' => $event->field_gg_twitter_caption->value,
-    ],
-  ];
+  $data = $url->toString();
 
-  $qrCodeData = json_encode($data);
+  $qrCodeData = is_string($data) ? $data : json_encode($data);
 
   $qrCode = new QrCode();
 
   $qrCode
     ->setText($qrCodeData)
-    ->setSize(300)
-    ->setPadding(10)
+    ->setSize(600)
+    ->setPadding(0)
     ->setErrorCorrection('high')
     ->setForegroundColor(array('r' => 0, 'g' => 0, 'b' => 0, 'a' => 0))
     ->setBackgroundColor(array('r' => 255, 'g' => 255, 'b' => 255, 'a' => 0))
