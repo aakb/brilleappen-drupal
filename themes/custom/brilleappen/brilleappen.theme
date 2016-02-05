@@ -1,0 +1,61 @@
+<?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+use Endroid\QrCode\QrCode;
+
+/**
+ * @file
+ * Functions to support theming in the Brilleappen theme.
+ */
+
+/**
+ * Implements hook_preprocess_node().
+ *
+ * Calls node type specific preprocess functions, e.g. "brilleappen_preprocess_node_event" for nodes of type event.
+ *
+ */
+function brilleappen_preprocess_node(array &$variables) {
+  $function = __FUNCTION__ . '_'. $variables['node']->getType();
+
+  if (function_exists($function)) {
+    $function($variables);
+  }
+}
+
+function brilleappen_preprocess_node_gg_event(array &$variables) {
+  $event = $variables['node'];
+  $url = \Drupal\core\Url::fromRoute('brilleappen.file', [ 'event_id' => $event->uuid->value ], [ 'absolute' => true ]);
+
+  $data = [
+    'url' => $url->toString(),
+    'username' => 'rest',
+    'password' => 'rest',
+    'caption' => [
+      'instagram' => $event->field_gg_instagram_caption->value,
+      'twitter' => $event->field_gg_twitter_caption->value,
+    ],
+  ];
+
+  $qrCodeData = json_encode($data);
+
+  $qrCode = new QrCode();
+
+  $qrCode
+    ->setText($qrCodeData)
+    ->setSize(300)
+    ->setPadding(10)
+    ->setErrorCorrection('high')
+    ->setForegroundColor(array('r' => 0, 'g' => 0, 'b' => 0, 'a' => 0))
+    ->setBackgroundColor(array('r' => 255, 'g' => 255, 'b' => 255, 'a' => 0))
+    // ->setLabel($qrCodeData)
+    // ->setLabelFontSize(16)
+  ;
+
+  $variables['qr_code'] = [
+    'self' => $qrCode,
+    'data' => $data,
+    'data_text' => $qrCodeData,
+    'data_uri' => 'data:image/jpeg;base64,' . base64_encode($qrCode->get('jpeg')),
+  ];
+}

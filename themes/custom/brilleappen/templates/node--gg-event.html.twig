@@ -1,0 +1,31 @@
+<div class="gg-event">
+  <dl>
+    <dt>{{ 'Title' | t }}</dt>
+    <dd>{{ node.title.value }}</dd>
+
+    <dt>{{ 'Uuid' | t }}</dt>
+    <dd>{{ node.uuid.value }}</dd>
+
+    <dt>{{ 'Captions' | t }}</dt>
+    <dd>
+      <dl>
+        {% if node.field_gg_instagram_caption.value is not empty %}
+        <dt>Instagram</dt>
+        <dd>{{ node.field_gg_instagram_caption.value }}</dd>
+        {% endif %}
+
+        {% if node.field_gg_twitter_caption.value is not empty %}
+        <dt>Twitter</dt>
+        <dd>{{ node.field_gg_twitter_caption.value }}</dd>
+        {% endif %}
+      </dl>
+    </dd>
+  </dl>
+
+  <figure>
+    <img src="{{ qr_code.data_uri }}" alt="{{ qr_code.data_text }}"/>
+    <figcaption>
+      <div style="white-space: pre">{{ qr_code.data | json_encode(constant('JSON_PRETTY_PRINT')) }}</div>
+    </figcaption>
+  </figure>
+</div>
