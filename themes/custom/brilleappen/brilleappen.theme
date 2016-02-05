@@ -29,6 +29,7 @@ function brilleappen_preprocess_node_gg_event(array &$variables) {
   $url = \Drupal\core\Url::fromRoute('brilleappen.file', [ 'event_id' => $event->uuid->value ], [ 'absolute' => true ]);
 
   $data = [
+    'title' => $event->getTitle(),
     'url' => $url->toString(),
     'caption' => [
       'instagram' => $event->field_gg_instagram_caption->value,
