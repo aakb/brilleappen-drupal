@@ -36,7 +36,7 @@ function brilleappen_preprocess_node_gg_event(array &$variables) {
 
   $qrCode
     ->setText($qrCodeData)
-    ->setSize(600)
+    ->setSize(300)
     ->setPadding(0)
     ->setErrorCorrection('high')
     ->setForegroundColor(array('r' => 0, 'g' => 0, 'b' => 0, 'a' => 0))
