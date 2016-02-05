@@ -26,9 +26,15 @@ function brilleappen_preprocess_node(array &$variables) {
 
 function brilleappen_preprocess_node_gg_event(array &$variables) {
   $event = $variables['node'];
-  $url = Url::fromRoute('<current>', [ '_format' => 'json' ], [ 'absolute' => TRUE ]);
+  $url = \Drupal\core\Url::fromRoute('brilleappen.file', [ 'event_id' => $event->uuid->value ], [ 'absolute' => true ]);
 
-  $data = $url->toString();
+  $data = [
+    'url' => $url->toString(),
+    'caption' => [
+      'instagram' => $event->field_gg_instagram_caption->value,
+      'twitter' => $event->field_gg_twitter_caption->value,
+    ],
+  ];
 
   $qrCodeData = is_string($data) ? $data : json_encode($data);
 
@@ -36,19 +42,16 @@ function brilleappen_preprocess_node_gg_event(array &$variables) {
 
   $qrCode
     ->setText($qrCodeData)
-    ->setSize(300)
+    ->setSize(400)
     ->setPadding(0)
     ->setErrorCorrection('high')
     ->setForegroundColor(array('r' => 0, 'g' => 0, 'b' => 0, 'a' => 0))
-    ->setBackgroundColor(array('r' => 255, 'g' => 255, 'b' => 255, 'a' => 0))
-    // ->setLabel($qrCodeData)
-    // ->setLabelFontSize(16)
-  ;
+    ->setBackgroundColor(array('r' => 255, 'g' => 255, 'b' => 255, 'a' => 0));
 
   $variables['qr_code'] = [
     'self' => $qrCode,
     'data' => $data,
     'data_text' => $qrCodeData,
-    'data_uri' => 'data:image/jpeg;base64,' . base64_encode($qrCode->get('jpeg')),
+    'data_uri' => $qrCode->getDataUri(),
   ];
 }
