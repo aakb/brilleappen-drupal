@@ -10,3 +10,16 @@ brilleappen.file:
     _title: 'File'
   requirements:
     _permission: 'access content'
+
+brilleappen.notify:
+  path: '/brilleappen/event/{event_id}/notify/{media_id}'
+  options:
+    _auth: [ 'basic_auth' ]
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _method: 'POST'
+  defaults:
+    _controller: '\Drupal\brilleappen\Controller\EventController::notify'
+    _title: 'Notify'
+  requirements:
+    _permission: 'access content'

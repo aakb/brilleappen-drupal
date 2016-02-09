@@ -10,14 +10,12 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 use Drupal\node\Entity\Node;
 use Drupal\file\Entity\File;
+use Drupal\core\Url;
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\HttpFoundation\File\MimeType\ExtensionGuesser;
 use Symfony\Component\HttpFoundation\Request;
-use Drupal\Core\Database\Query\Condition;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
-use Symfony\Component\Validator\Constraints\False;
 
 
 class EventController extends ControllerBase {
@@ -68,10 +66,97 @@ class EventController extends ControllerBase {
 
       $shareMessages = ($request->get('share') == 'yes') ? $this->push($file, $event, $media) : NULL;
 
-      $this->sendResponse([ 'status' => 'OK', 'message' => 'Media added to event "' . $event->getTitle() . '"', 'shareMessages' => $shareMessages ]);
+      $this->sendResponse([
+        'status' => 'OK',
+        'message' => 'Media added to event "' . $event->getTitle() . '"',
+        'media_id' => $media->uuid->value,
+        'notify_url' => Url::fromRoute('brilleappen.notify', [ 'event_id' => $event->uuid->value, 'media_id' => $media->uuid->value ], [ 'absolute' => TRUE ])->toString(),
+        'shareMessages' => $shareMessages,
+      ]);
     } catch (\Exception $ex) {
       $this->sendResponse([ 'status' => 'ERROR', 'message' => $ex->getMessage(), 'type' => get_class($ex) ], 400);
     }
+  }
+
+  /**
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   * @param string $event_id
+   */
+  public function notify(Request $request, $event_id, $media_id) {
+    try {
+      $event = $this->getEvent($event_id);
+      $media = $this->getMedia($media_id);
+      $file = File::load($media->field_gg_file->target_id);
+
+      if (!$file) {
+        throw new \Exception('Cannot load file');
+      }
+
+      $notifyMessages = $this->push($file, $event, $media);
+
+      $this->sendResponse([
+        'status' => 'OK',
+        'notifyMessages' => $notifyMessages,
+      ]);
+    } catch (\Exception $ex) {
+      $this->sendResponse([ 'status' => 'ERROR', 'message' => $ex->getMessage(), 'type' => get_class($ex) ], 400);
+    }
+  }
+
+  /**
+   * Get an Event by uuid.
+   *
+   * @param string $eventId
+   *   The event id.
+   * @return \Drupal\node\Entity\Node The event.
+   * The event.
+   * @throws \Exception
+   */
+  private function getEvent($eventId) {
+    $query = \Drupal::entityQuery('node')
+           ->condition('type', 'gg_event', '=')
+           ->condition('uuid', $eventId, '=');
+
+    $entityIds = $query->execute();
+    if (count($entityIds) != 1) {
+      throw new \Exception('No such event: ' . $eventId);
+    }
+    $entityId = array_shift($entityIds);
+    $event = Node::load($entityId);
+
+    if (!$event) {
+      throw new \Exception('No such event: ' . $eventId);
+    }
+
+    return $event;
+  }
+
+  /**
+   * Get a Media by uuid.
+   *
+   * @param string $mediaId
+   *   The media id.
+   * @return \Drupal\node\Entity\Node The media.
+   * The media.
+   * @throws \Exception
+   */
+  private function getMedia($mediaId) {
+    $query = \Drupal::entityQuery('node')
+           ->condition('type', 'gg_media', '=')
+           ->condition('uuid', $mediaId, '=');
+
+    $entityIds = $query->execute();
+    if (count($entityIds) != 1) {
+      throw new \Exception('No such media: ' . $mediaId);
+    }
+    $entityId = array_shift($entityIds);
+    $media = Node::load($entityId);
+
+    if (!$media) {
+      throw new \Exception('No such media: ' . $mediaId);
+    }
+
+    return $media;
   }
 
   private function push(File $file, Node $event, Node $media) {
