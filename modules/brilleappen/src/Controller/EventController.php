@@ -133,6 +133,22 @@ class EventController extends ControllerBase {
       }
     }
 
+    if ($event->field_gg_email_push->value) {
+      try {
+        $recipients = $event->field_gg_email_recipients->value;
+        $langcode = 'en';
+        $params = [
+          'event' => $event,
+          'media' => $media,
+        ];
+
+        $message = \Drupal::service('plugin.manager.mail')->mail('brilleappen', 'media_added', $recipients, $langcode, $params, TRUE);
+        $messages['email'] = 'OK';
+      } catch (\Exception $ex) {
+        $messages['email'] = $ex->getMessage();
+      }
+    }
+
     $this->addMediaData($media, [ 'push_messages' => $messages ]);
 
     return $messages;

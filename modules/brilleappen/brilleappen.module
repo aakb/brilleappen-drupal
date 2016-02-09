@@ -1,0 +1,40 @@
+<?php
+/**
+ * @file
+ * Stuff for the Brilleappen module.
+ */
+
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_mail().
+ */
+function brilleappen_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'media_added':
+      $event = $params['event'];
+      $eventUrl = Url::fromRoute('entity.node.canonical', [ 'node' => $event->nid->value ], [ 'absolute' => true ]);
+
+      $media = $params['media'];
+      $mediaUrl = Url::fromRoute('entity.node.canonical', [ 'node' => $media->nid->value ], [ 'absolute' => true ]);
+
+      $message['subject'] = t('File added to event "@event_title"', [ '@event_title' =>  $event->getTitle() ]);
+      $message['body'][] = t('A new file has been added to "@event_title": @media_url', [ '@event_title' =>  $event->getTitle(), '@media_url' => $mediaUrl->toString() ]);
+      break;
+  }
+  // $token_service = \Drupal::token();
+  // $language_manager = \Drupal::languageManager();
+  // $langcode = $message['langcode'];
+  // $variables = array('user' => $params['account']);
+
+  // $language = \Drupal::languageManager()->getLanguage($params['account']->getPreferredLangcode());
+  // $original_language = $language_manager->getConfigOverrideLanguage();
+  // $language_manager->setConfigOverrideLanguage($language);
+  // $mail_config = \Drupal::config('user.mail');
+
+  // $token_options = ['langcode' => $langcode, 'callback' => 'user_mail_tokens', 'clear' => TRUE];
+  // $message['subject'] .= PlainTextOutput::renderFromHtml($token_service->replace($mail_config->get($key . '.subject'), $variables, $token_options));
+  // $message['body'][] = $token_service->replace($mail_config->get($key . '.body'), $variables, $token_options);
+
+  // $language_manager->setConfigOverrideLanguage($original_language);
+}
