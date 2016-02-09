@@ -10,7 +10,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 use Drupal\node\Entity\Node;
 use Drupal\file\Entity\File;
-use Drupal\core\Url;
+use Drupal\Core\Url;
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\File\MimeType\ExtensionGuesser;
 use Symfony\Component\HttpFoundation\Request;

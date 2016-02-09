@@ -3,7 +3,7 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Endroid\QrCode\QrCode;
-use Drupal\core\Url;
+use Drupal\Core\Url;
 
 /**
  * @file
@@ -26,7 +26,7 @@ function brilleappen_preprocess_node(array &$variables) {
 
 function brilleappen_preprocess_node_gg_event(array &$variables) {
   $event = $variables['node'];
-  $url = \Drupal\core\Url::fromRoute('brilleappen.file', [ 'event_id' => $event->uuid->value ], [ 'absolute' => true ]);
+  $url = Url::fromRoute('brilleappen.file', [ 'event_id' => $event->uuid->value ], [ 'absolute' => true ]);
 
   $data = [
     'title' => $event->getTitle(),
