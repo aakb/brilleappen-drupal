@@ -1,0 +1,13 @@
+<article class="gg-media">
+  <header>
+    <h1>{{ node.title.value }}</h1>
+  </header>
+
+  {% if node.field_gg_file is not empty %}
+    <img src="{{ file_url(node.field_gg_file.entity.uri.value) }}"/>
+  {% endif %}
+
+  <footer>
+    <a href="{{ path('entity.node.canonical', {'node': node.field_gg_event.entity.nid.value}) }}">{{ 'Event'|t }}: {{ node.field_gg_event.entity.title.value }}</a>
+  </footer>
+</article>
