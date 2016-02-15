@@ -28,7 +28,7 @@ On success, the json response will look like this:
   "status": "OK",
   "message": "Media added to event \"The first event\"",
   "media_id": "0ccf2af3-ba5d-429d-8604-4d5f39715c1a",
-  "notify_url": "http:\/\/brilleappen.hulk.aakb.dk\/brilleappen\/event\/09c4846b-c3f9-44d6-b100-ad4eb5dd557b\/notify\/0ccf2af3-ba5d-429d-8604-4d5f39715c1a",
+  "notify_url": "http://brilleappen.hulk.aakb.dk/brilleappen/event/09c4846b-c3f9-44d6-b100-ad4eb5dd557b/notify/0ccf2af3-ba5d-429d-8604-4d5f39715c1a",
   "shareMessages": null
 }
 ```
@@ -46,7 +46,7 @@ On success, the response looks like this:
   "status": "OK",
   "message": "Media added to event \"The first event\"",
   "media_id": "0ccf2af3-ba5d-429d-8604-4d5f39715c1a",
-  "notify_url": "http:\/\/brilleappen.hulk.aakb.dk\/brilleappen\/event\/09c4846b-c3f9-44d6-b100-ad4eb5dd557b\/notify\/0ccf2af3-ba5d-429d-8604-4d5f39715c1a",
+  "notify_url": "http://brilleappen.hulk.aakb.dk/brilleappen/event/09c4846b-c3f9-44d6-b100-ad4eb5dd557b/notify/0ccf2af3-ba5d-429d-8604-4d5f39715c1a",
   "shareMessages": {
     "twitter": "OK",
     "email": "OK",
@@ -73,5 +73,25 @@ and get this response
     "twitter": "OK",
     "email": "OK",
   }
+}
+```
+
+Create a new Event:
+
+```
+curl --request POST --user rest:rest http://brilleappen.vm/brilleappen/event/create --data-binary @- <<'EOF'
+{
+	"title": "The event title"
+}
+EOF
+```
+
+Response on success:
+
+```
+{
+  "status": "OK",
+  "url": "http://brilleappen.vm/node/118",
+  "add_file_url": "http://brilleappen.vm/brilleappen/event/7efdda71-67e6-454c-9c00-ee9777243653/file"
 }
 ```

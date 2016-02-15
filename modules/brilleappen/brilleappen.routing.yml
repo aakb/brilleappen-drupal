@@ -1,4 +1,17 @@
-brilleappen.file:
+brilleappen.create_event:
+  path: '/brilleappen/event/create'
+  options:
+    _auth: [ 'basic_auth' ]
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _method: 'POST'
+  defaults:
+    _controller: '\Drupal\brilleappen\Controller\EventController::createEvent'
+    _title: 'New'
+  requirements:
+    _permission: 'access content'
+
+brilleappen.add_file:
   path: '/brilleappen/event/{event_id}/file'
   options:
     _auth: [ 'basic_auth' ]
@@ -6,12 +19,12 @@ brilleappen.file:
     _user_is_logged_in: 'TRUE'
     _method: 'POST'
   defaults:
-    _controller: '\Drupal\brilleappen\Controller\EventController::file'
+    _controller: '\Drupal\brilleappen\Controller\EventController::addFile'
     _title: 'File'
   requirements:
     _permission: 'access content'
 
-brilleappen.notify:
+brilleappen.notify_file:
   path: '/brilleappen/event/{event_id}/notify/{media_id}'
   options:
     _auth: [ 'basic_auth' ]
@@ -19,7 +32,7 @@ brilleappen.notify:
     _user_is_logged_in: 'TRUE'
     _method: 'POST'
   defaults:
-    _controller: '\Drupal\brilleappen\Controller\EventController::notify'
+    _controller: '\Drupal\brilleappen\Controller\EventController::notifyFile'
     _title: 'Notify'
   requirements:
     _permission: 'access content'

@@ -19,11 +19,41 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 
 
 class EventController extends ControllerBase {
+  public function createEvent(Request $request) {
+    try {
+      $content = $request->getContent();
+      if (empty($content)) {
+        throw new \Exception('Missing data');
+      }
+      $data = @json_decode($content);
+      if (empty($data)) {
+        throw new \Exception('Invalid data');
+      }
+      if (empty($data->title)) {
+        throw new \Exception('Missing title');
+      }
+
+      $event = Node::create([
+        'type' => 'gg_event',
+        'title' => $data->title,
+      ]);
+      $event->save();
+
+      $this->sendResponse([
+        'status' => 'OK',
+        'url' => $url = Url::fromRoute('entity.node.canonical', [ 'node' => $event->nid->value ], [ 'absolute' => true ])->toString(),
+        'add_file_url' => $url = Url::fromRoute('brilleappen.add_file', [ 'event_id' => $event->uuid->value ], [ 'absolute' => true ])->toString(),
+      ], 201);
+    } catch (\Exception $ex) {
+      $this->sendResponse([ 'status' => 'ERROR', 'message' => $ex->getMessage(), 'type' => get_class($ex) ], 400);
+    }
+  }
+
   /**
    * @param \Symfony\Component\HttpFoundation\Request $request
    * @param string $event_id
    */
-  public function file(Request $request, $event_id = '') {
+  public function addFile(Request $request, $event_id = '') {
     try {
       if ($request->getMethod() != 'POST') {
         throw new \Exception('Invalid request');
@@ -52,9 +82,6 @@ class EventController extends ControllerBase {
       $filename = uniqid('brilleappen_' . strftime('%Y%m%dT%H%M%S') . '_') . '.' . ExtensionGuesser::getInstance()->guess($request->get('type'));
       $file = file_save_data($data, 'public://' . $filename, FILE_EXISTS_REPLACE);
 
-      $event->field_gg_files->appendItem($file);
-      $event->save();
-
       // Create a new Media node.
       $media = Node::create([
         'type' => 'gg_media',
@@ -70,7 +97,7 @@ class EventController extends ControllerBase {
         'status' => 'OK',
         'message' => 'Media added to event "' . $event->getTitle() . '"',
         'media_id' => $media->uuid->value,
-        'notify_url' => Url::fromRoute('brilleappen.notify', [ 'event_id' => $event->uuid->value, 'media_id' => $media->uuid->value ], [ 'absolute' => TRUE ])->toString(),
+        'notify_url' => Url::fromRoute('brilleappen.notify_file', [ 'event_id' => $event->uuid->value, 'media_id' => $media->uuid->value ], [ 'absolute' => TRUE ])->toString(),
         'shareMessages' => $shareMessages,
       ]);
     } catch (\Exception $ex) {
@@ -82,7 +109,7 @@ class EventController extends ControllerBase {
    * @param \Symfony\Component\HttpFoundation\Request $request
    * @param string $event_id
    */
-  public function notify(Request $request, $event_id, $media_id) {
+  public function notifyFile(Request $request, $event_id, $media_id) {
     try {
       $event = $this->getEvent($event_id);
       $media = $this->getMedia($media_id);
@@ -228,7 +255,7 @@ class EventController extends ControllerBase {
         ];
 
         $message = \Drupal::service('plugin.manager.mail')->mail('brilleappen', 'media_added', $recipients, $langcode, $params, TRUE);
-        $messages['email'] = 'OK';
+        $messages['email'] = ($message['result'] === TRUE) ? 'OK' : 'NOT_SENT';
       } catch (\Exception $ex) {
         $messages['email'] = $ex->getMessage();
       }
