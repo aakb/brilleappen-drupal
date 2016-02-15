@@ -1,0 +1,5 @@
+services:
+  brilleappen.encoder.json:
+    class: Drupal\brilleappen\Encoder\JsonEncoder
+    tags:
+      - { name: encoder, format: json, priority: 100 }
