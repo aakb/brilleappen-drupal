@@ -13,10 +13,10 @@ use Drupal\Core\Url;
 /**
  * Implements hook_preprocess_node().
  *
- * Calls node type specific preprocess functions, e.g. "brilleappen_preprocess_node_event" for nodes of type event.
+ * Calls node type specific preprocess functions, e.g. "brilleappen_theme_preprocess_node_event" for nodes of type event.
  *
  */
-function brilleappen_preprocess_node(array &$variables) {
+function brilleappen_theme_preprocess_node(array &$variables) {
   $function = __FUNCTION__ . '_'. $variables['node']->getType();
 
   if (function_exists($function)) {
@@ -24,7 +24,7 @@ function brilleappen_preprocess_node(array &$variables) {
   }
 }
 
-function brilleappen_preprocess_node_gg_event(array &$variables) {
+function brilleappen_theme_preprocess_node_gg_event(array &$variables) {
   $event = $variables['node'];
   $url = Url::fromRoute('brilleappen.file', [ 'event_id' => $event->uuid->value ], [ 'absolute' => true ]);
 
