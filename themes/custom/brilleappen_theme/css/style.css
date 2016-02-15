@@ -1,4 +1,12 @@
 img {
   max-width: 100%; }
 
+.gg-event .media .item {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: inline-block;
+  width: 25%;
+  padding: 1em; }
+
 /*# sourceMappingURL=style.css.map */

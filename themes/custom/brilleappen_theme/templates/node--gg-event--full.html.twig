@@ -3,8 +3,26 @@
     <dt>{{ 'Title' | t }}</dt>
     <dd>{{ node.title.value }}</dd>
 
+    {#
     <dt>{{ 'Uuid' | t }}</dt>
     <dd>{{ node.uuid.value }}</dd>
+    #}
+
+    {% if node.field_gg_parent is not empty %}
+    <dt>{{ 'Parent' | t }}</dt>
+    <dd>
+      <a href="{{ path('entity.node.canonical', {'node': node.field_gg_parent.entity.nid.value}) }}">{{ node.field_gg_parent.entity.title.value }}</a></dd>
+    {% endif %}
+
+    {% if events is not empty %}
+    <dt>{{ 'Children' | t }}</dt>
+    <dd>
+      <ul>
+        {% for child in events %}
+          <li><a href="{{ path('entity.node.canonical', {'node': child.fields.nid.value}) }}">{{ child.fields.title.value }}</a></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
 
     <dt>{{ 'Captions' | t }}</dt>
     <dd>
@@ -22,10 +40,27 @@
     </dd>
   </dl>
 
+  {# [[ {{ field_gg_geolocation | render }} ]] #}
+
   <figure>
-    <img src="{{ qr_code.data_uri }}" alt="{{ qr_code.data_text }}"/>
-    <figcaption>
-      <div style="white-space: pre">{{ qr_code.data | json_encode(constant('JSON_PRETTY_PRINT')) }}</div>
-    </figcaption>
+    <a href="{{ qr_code.data_uri }}">
+      <img src="{{ qr_code.data_uri }}" alt="{{ qr_code.data_text }}" alt="{{ qr_code.data | json_encode(constant('JSON_PRETTY_PRINT')) }}"/>
+    </a>
   </figure>
+
+  {% if media is not empty %}
+    <div class="media">
+      {% for item in media %}<article class="item">
+          <a href="{{ path('entity.node.canonical', {'node': item.fields.nid.value}) }}">
+            <header>
+              <h1>{{ item.title.value }}</h1>
+            </header>
+
+            {% if item.field_gg_file is not empty %}
+              <img src="{{ file_url(item.field_gg_file.entity.uri.value) }}"/>
+            {% endif %}
+          </a>
+        </article>{% endfor %}
+    </div>
+  {% endif %}
 </div>

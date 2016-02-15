@@ -4,6 +4,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use Endroid\QrCode\QrCode;
 use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
 
 /**
  * @file
@@ -26,15 +27,12 @@ function brilleappen_theme_preprocess_node(array &$variables) {
 
 function brilleappen_theme_preprocess_node_gg_event(array &$variables) {
   $event = $variables['node'];
-  $url = Url::fromRoute('brilleappen.file', [ 'event_id' => $event->uuid->value ], [ 'absolute' => true ]);
-
+  $url = Url::fromRoute('entity.node.canonical', [ 'node' => $event->nid->value ], [
+    'absolute' => true,
+    'query' => [ '_format' => 'json' ],
+  ]);
   $data = [
-    'title' => $event->getTitle(),
     'url' => $url->toString(),
-    'caption' => [
-      'instagram' => $event->field_gg_instagram_caption->value,
-      'twitter' => $event->field_gg_twitter_caption->value,
-    ],
   ];
 
   $qrCodeData = is_string($data) ? $data : json_encode($data);
@@ -43,8 +41,8 @@ function brilleappen_theme_preprocess_node_gg_event(array &$variables) {
 
   $qrCode
     ->setText($qrCodeData)
-    ->setSize(400)
-    ->setPadding(0)
+    ->setSize(800)
+    ->setPadding(40)
     ->setErrorCorrection('high')
     ->setForegroundColor(array('r' => 0, 'g' => 0, 'b' => 0, 'a' => 0))
     ->setBackgroundColor(array('r' => 255, 'g' => 255, 'b' => 255, 'a' => 0));
@@ -55,4 +53,24 @@ function brilleappen_theme_preprocess_node_gg_event(array &$variables) {
     'data_text' => $qrCodeData,
     'data_uri' => $qrCode->getDataUri(),
   ];
+
+  $query = \Drupal::entityQuery('node')
+         ->condition('type', 'gg_event', '=')
+         ->condition('field_gg_parent', $event->nid->value, '=')
+         ->sort('created', 'ASC');
+  $entityIds = $query->execute();
+
+  if ($entityIds) {
+    $variables['events'] = Node::loadMultiple($entityIds);
+  }
+
+  $query = \Drupal::entityQuery('node')
+         ->condition('type', 'gg_media', '=')
+         ->condition('field_gg_event', $event->nid->value, '=')
+         ->sort('created', 'DESC');
+  $entityIds = $query->execute();
+
+  if ($entityIds) {
+    $variables['media'] = Node::loadMultiple($entityIds);
+  }
 }
