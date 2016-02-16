@@ -1,9 +1,5 @@
 <article class="gg-media">
-  {% if node.field_gg_file is not empty %}
-    <figure>
-      <img src="{{ file_url(node.field_gg_file.entity.uri.value) }}"/>
-    </figure>
-  {% endif %}
+  {% include '@brilleappen_theme/partials/_media.html.twig' with { url: node.field_gg_file.entity.uri.value } only %}
 
   {{ content }}
 </article>

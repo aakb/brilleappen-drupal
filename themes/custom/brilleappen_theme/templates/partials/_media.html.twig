@@ -1,0 +1,14 @@
+<figure>
+  {% set url = file_url(url) %}
+  {% if url matches '/\.mp4$/' %}
+    <video controls="controls">
+      <source src="{{ url }}" type="video/mp4" />
+      I'm sorry; your browser doesn't support HTML5 video in WebM with VP8 or MP4 with H.264.
+    </video>
+  {% else %}
+    <img src="{{ url }}"/>
+  {% endif %}
+  {% if title %}
+    <figcaption>{{ title }}</figcaption>
+  {% endif %}
+</figure>

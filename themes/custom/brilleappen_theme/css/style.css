@@ -1,4 +1,4 @@
-img {
+img, video {
   max-width: 100%; }
 
 .gg-event .media .item {
@@ -11,6 +11,9 @@ img {
   vertical-align: top; }
   .gg-event .media .item figure {
     margin: 0; }
+  .gg-event .media .item img, .gg-event .media .item video {
+    display: block;
+    margin: 0 auto; }
   @media (max-width: 600px) {
     .gg-event .media .item {
       width: 50%; } }

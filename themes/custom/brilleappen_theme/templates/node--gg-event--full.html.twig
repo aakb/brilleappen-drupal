@@ -31,13 +31,7 @@
       {% for item in media %}
         <article class="item">
           <a href="{{ path('entity.node.canonical', {'node': item.fields.nid.value}) }}">
-            <figure>
-              {% if item.field_gg_file is not empty %}
-                <img src="{{ file_url(item.field_gg_file.entity.uri.value) }}"/>
-              {% endif %}
-
-              <figcaption>{{ item.title.value }}</figcaption>
-            </figure>
+            {% include '@brilleappen_theme/partials/_media.html.twig' with { url: item.field_gg_file.entity.uri.value, title: item.title.value  } only %}
           </a>
         </article>
       {% endfor %}

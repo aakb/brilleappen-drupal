@@ -1,6 +1,6 @@
 @import 'compass/css3';
 
-img {
+img, video {
 	max-width: 100%;
 }
 
@@ -15,6 +15,11 @@ img {
 
 	figure {
 		margin: 0;
+	}
+
+	img, video {
+		display: block;
+		margin: 0 auto;
 	}
 
 	@media (max-width: 600px) {
