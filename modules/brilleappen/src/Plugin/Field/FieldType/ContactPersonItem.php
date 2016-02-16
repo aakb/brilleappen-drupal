@@ -44,8 +44,8 @@ class ContactPersonItem extends FieldItemBase {
           'length' => '255',
           'not null' => TRUE,
         ),
-        'phone' => array(
-          'description' => 'Stores the phone',
+        'telephone' => array(
+          'description' => 'Stores the telephone',
           'type' => 'varchar',
           'length' => '255',
           'not null' => TRUE,
@@ -65,10 +65,10 @@ class ContactPersonItem extends FieldItemBase {
                         ->setLabel(t('Name'));
 
     $properties['email'] = DataDefinition::create('email')
-                        ->setLabel(t('Email'));
+                         ->setLabel(t('Email'));
 
-    $properties['phone'] = DataDefinition::create('string')
-                        ->setLabel(t('Phone'));
+    $properties['telephone'] = DataDefinition::create('string')
+                             ->setLabel(t('Telephone'));
 
     return $properties;
   }
@@ -87,7 +87,7 @@ class ContactPersonItem extends FieldItemBase {
   public function preSave() {
     $this->name = trim($this->name);
     $this->email = trim($this->email);
-    $this->phone = trim($this->phone);
+    $this->telephone = trim($this->telephone);
   }
 
 }

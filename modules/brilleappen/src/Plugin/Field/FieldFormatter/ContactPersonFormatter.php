@@ -35,7 +35,7 @@ class ContactPersonFormatter extends FormatterBase {
         '#theme' => 'brilleappen_contact_person_formatter',
         '#name' => $item->name,
         '#email' => $item->email,
-        '#phone' => $item->phone,
+        '#telephone' => $item->telephone,
       );
     }
 

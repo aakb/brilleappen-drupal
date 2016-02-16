@@ -38,3 +38,19 @@ function brilleappen_mail($key, &$message, $params) {
 
   // $language_manager->setConfigOverrideLanguage($original_language);
 }
+
+/**
+ * Implements hook_theme().
+ */
+function brilleappen_theme() {
+  return [
+    'brilleappen_contact_person_formatter' => [
+      'variables' => [
+        'name' => NULL,
+        'email' => NULL,
+        'telephone' => NULL,
+      ],
+      'template' => 'brilleappen-contact-person-formatter',
+    ],
+  ];
+}

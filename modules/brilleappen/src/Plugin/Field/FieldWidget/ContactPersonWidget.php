@@ -47,13 +47,13 @@ class ContactPersonWidget extends WidgetBase {
       '#description' => $this->t('Email'),
     );
 
-    $element['phone'] = array(
+    $element['telephone'] = array(
       '#type' => 'textfield',
-      '#title' => $this->t('Phone'),
+      '#title' => $this->t('Telephone'),
       '#empty_value' => '',
-      '#default_value' => (isset($items[$delta]->phone)) ? $items[$delta]->phone : NULL,
+      '#default_value' => (isset($items[$delta]->telephone)) ? $items[$delta]->telephone : NULL,
       '#maxlength' => 255,
-      '#description' => $this->t('Phone'),
+      '#description' => $this->t('Telephone'),
     );
 
     return $element;

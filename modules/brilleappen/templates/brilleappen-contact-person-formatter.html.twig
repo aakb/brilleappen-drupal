@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * Default microdata theme implementation for a contact person.
+ *
+ * Available variables:
+ * - name: The person name.
+ * - email: The email.
+ * - phone: The phone.
+ *
+ * @see template_preprocess()
+ *
+ * @ingroup themeable
+ */
+#}
+{% spaceless %}
+<span itemscope itemtype="http://schema.org/Person">
+  <span itemprop="name">{{ name }}</span>
+  {% if telephone %}
+    <span itemprop="telephone">{{ telephone }}</span>
+  {% endif %}
+  {% if email %}
+    <a href="mailto:{{ email }}" itemprop="email">{{ email }}</a>
+  {% endif %}
+</span>
+{% endspaceless %}
