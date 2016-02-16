@@ -1,14 +1,30 @@
-<figure>
-  {% set url = file_url(url) %}
+{% macro media(params) %}
+  {% set url = file_url(params.media_url) %}
   {% if url matches '/\.mp4$/' %}
     <video controls="controls">
       <source src="{{ url }}" type="video/mp4" />
-      I'm sorry; your browser doesn't support HTML5 video in WebM with VP8 or MP4 with H.264.
     </video>
   {% else %}
-    <img src="{{ url }}"/>
+    {% set link_url = params.link_url ? params.link_url : url %}
+    <a href="{{ link_url }}">
+      <img src="{{ url }}"/>
+    </a>
   {% endif %}
+{% endmacro %}
+
+{% spaceless %}
+<figure>
+  {% import _self as this %}
+  {{ this.media(_context) }}
+
   {% if title %}
-    <figcaption>{{ title }}</figcaption>
+    {% if link_url %}
+      <a href="{{ link_url }}">
+        <figcaption>{{ title }}</figcaption>
+      </a>
+    {% else %}
+      <figcaption>{{ title }}</figcaption>
+    {% endif %}
   {% endif %}
 </figure>
+{% endspaceless %}

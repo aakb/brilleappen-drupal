@@ -30,9 +30,7 @@
       {% spaceless %}
       {% for item in media %}
         <article class="item">
-          <a href="{{ path('entity.node.canonical', {'node': item.fields.nid.value}) }}">
-            {% include '@brilleappen_theme/partials/_media.html.twig' with { url: item.field_gg_file.entity.uri.value, title: item.title.value  } only %}
-          </a>
+          {% include '@brilleappen_theme/partials/_media.html.twig' with { media_url: item.field_gg_file.entity.uri.value, title: item.title.value, link_url: path('entity.node.canonical', {'node': item.fields.nid.value}) } only %}
         </article>
       {% endfor %}
       {% endspaceless %}
