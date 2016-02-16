@@ -41,7 +41,10 @@ class EventController extends ControllerBase {
 
       $this->sendResponse([
         'status' => 'OK',
-        'url' => $url = Url::fromRoute('entity.node.canonical', [ 'node' => $event->nid->value ], [ 'absolute' => true ])->toString(),
+        'url' => $url = Url::fromRoute('entity.node.canonical', [ 'node' => $event->nid->value ], [
+          'absolute' => TRUE,
+          'query' => [ '_format' => 'json' ],
+        ])->toString(),
         'add_file_url' => $url = Url::fromRoute('brilleappen.add_file', [ 'event_id' => $event->uuid->value ], [ 'absolute' => true ])->toString(),
       ], 201);
     } catch (\Exception $ex) {
