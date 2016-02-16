@@ -28,7 +28,7 @@ function brilleappen_theme_preprocess_node(array &$variables) {
 function brilleappen_theme_preprocess_node_gg_event(array &$variables) {
   $event = $variables['node'];
   $url = Url::fromRoute('entity.node.canonical', [ 'node' => $event->nid->value ], [
-    'absolute' => true,
+    'absolute' => TRUE,
     'query' => [ '_format' => 'json' ],
   ]);
   $data = [

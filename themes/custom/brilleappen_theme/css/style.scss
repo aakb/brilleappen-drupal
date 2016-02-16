@@ -10,4 +10,14 @@ img {
 	display: inline-block;
 	width: 25%;
 	padding: 1em;
+
+	vertical-align: top;
+
+	figure {
+		margin: 0;
+	}
+
+	@media (max-width: 600px) {
+		width: 50%;
+	}
 }

@@ -1,66 +1,55 @@
 <div class="gg-event">
-  <dl>
-    <dt>{{ 'Title' | t }}</dt>
-    <dd>{{ node.title.value }}</dd>
+  {{ content }}
 
-    {#
-    <dt>{{ 'Uuid' | t }}</dt>
-    <dd>{{ node.uuid.value }}</dd>
-    #}
+  {#
+  <section>
+    <header>{{ 'Captions' | t }}</header>
 
-    {% if node.field_gg_parent is not empty %}
-    <dt>{{ 'Parent' | t }}</dt>
-    <dd>
-      <a href="{{ path('entity.node.canonical', {'node': node.field_gg_parent.entity.nid.value}) }}">{{ node.field_gg_parent.entity.title.value }}</a></dd>
-    {% endif %}
-
-    {% if events is not empty %}
-    <dt>{{ 'Children' | t }}</dt>
-    <dd>
-      <ul>
-        {% for child in events %}
-          <li><a href="{{ path('entity.node.canonical', {'node': child.fields.nid.value}) }}">{{ child.fields.title.value }}</a></li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-
-    <dt>{{ 'Captions' | t }}</dt>
-    <dd>
-      <dl>
-        {% if node.field_gg_instagram_caption.value is not empty %}
+    <dl>
+      {% if node.field_gg_instagram_caption.value is not empty %}
         <dt>Instagram</dt>
         <dd>{{ node.field_gg_instagram_caption.value }}</dd>
-        {% endif %}
+      {% endif %}
 
-        {% if node.field_gg_twitter_caption.value is not empty %}
+      {% if node.field_gg_twitter_caption.value is not empty %}
         <dt>Twitter</dt>
         <dd>{{ node.field_gg_twitter_caption.value }}</dd>
-        {% endif %}
-      </dl>
-    </dd>
-  </dl>
-
-  {# [[ {{ field_gg_geolocation | render }} ]] #}
+      {% endif %}
+    </dl>
+  </section>
+  #}
 
   <figure>
     <a href="{{ qr_code.data_uri }}">
-      <img src="{{ qr_code.data_uri }}" alt="{{ qr_code.data_text }}" alt="{{ qr_code.data | json_encode(constant('JSON_PRETTY_PRINT')) }}"/>
+      <img src="{{ qr_code.data_uri }}" alt="{{ qr_code.data_text }}"/>
     </a>
   </figure>
 
   {% if media is not empty %}
     <div class="media">
-      {% for item in media %}<article class="item">
+      {% spaceless %}
+      {% for item in media %}
+        <article class="item">
           <a href="{{ path('entity.node.canonical', {'node': item.fields.nid.value}) }}">
-            <header>
-              <h1>{{ item.title.value }}</h1>
-            </header>
+            <figure>
+              {% if item.field_gg_file is not empty %}
+                <img src="{{ file_url(item.field_gg_file.entity.uri.value) }}"/>
+              {% endif %}
 
-            {% if item.field_gg_file is not empty %}
-              <img src="{{ file_url(item.field_gg_file.entity.uri.value) }}"/>
-            {% endif %}
+              <figcaption>{{ item.title.value }}</figcaption>
+            </figure>
           </a>
-        </article>{% endfor %}
+        </article>
+      {% endfor %}
+      {% endspaceless %}
     </div>
+  {% endif %}
+
+  {% if events is not empty %}
+    <ul>
+      {% for child in events %}
+        <li><a href="{{ path('entity.node.canonical', {'node': child.fields.nid.value}) }}">{{ child.fields.title.value }}</a></li>
+      {% endfor %}
+    </ul>
   {% endif %}
 </div>

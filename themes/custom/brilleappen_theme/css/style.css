@@ -7,6 +7,12 @@ img {
   box-sizing: border-box;
   display: inline-block;
   width: 25%;
-  padding: 1em; }
+  padding: 1em;
+  vertical-align: top; }
+  .gg-event .media .item figure {
+    margin: 0; }
+  @media (max-width: 600px) {
+    .gg-event .media .item {
+      width: 50%; } }
 
 /*# sourceMappingURL=style.css.map */
