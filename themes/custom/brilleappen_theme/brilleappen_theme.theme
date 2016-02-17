@@ -64,13 +64,8 @@ function brilleappen_theme_preprocess_node_gg_event(array &$variables) {
     $variables['events'] = Node::loadMultiple($entityIds);
   }
 
-  $query = \Drupal::entityQuery('node')
-         ->condition('type', 'gg_media', '=')
-         ->condition('field_gg_event', $event->nid->value, '=')
-         ->sort('created', 'DESC');
-  $entityIds = $query->execute();
-
-  if ($entityIds) {
-    $variables['media'] = Node::loadMultiple($entityIds);
+  $mediaView = \Drupal\views\Views::getView('gg_event_media');
+  if ($mediaView) {
+    $variables['event_media_view'] = $mediaView->buildRenderable(); //('gg_event_media_embed');
   }
 }

@@ -4,7 +4,7 @@ img, video {
 	max-width: 100%;
 }
 
-.gg-event .media .item {
+.gg-event .view-gg-event-media .view-content > div {
 	@include box-sizing(border-box);
 
 	display: inline-block;

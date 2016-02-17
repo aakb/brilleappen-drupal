@@ -25,17 +25,12 @@
     </a>
   </figure>
 
-  {% if media is not empty %}
-    <div class="media">
-      {% spaceless %}
-      {% for item in media %}
-        <article class="item">
-          {% include '@brilleappen_theme/partials/_media.html.twig' with { media_url: item.field_gg_file.entity.uri.value, title: item.title.value, link_url: path('entity.node.canonical', {'node': item.fields.nid.value}) } only %}
-        </article>
-      {% endfor %}
-      {% endspaceless %}
-    </div>
-  {% endif %}
+  <div class="media">
+    <h2>{{ 'Media' | t }}</h2>
+    {% spaceless %}
+    {{ event_media_view }}
+    {% endspaceless %}
+  </div>
 
   {% if events is not empty %}
     <ul>
