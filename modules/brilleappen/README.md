@@ -91,7 +91,16 @@ Response on success:
 ```
 {
   "status": "OK",
-  "url": "http://brilleappen.vm/node/118",
-  "add_file_url": "http://brilleappen.vm/brilleappen/event/7efdda71-67e6-454c-9c00-ee9777243653/file"
+  "url": "http://brilleappen.vm/node/118?_format=json",
 }
+```
+
+You can also pass an Event type, e.g. "breakdown"
+```
+curl --request POST --user rest:rest http://brilleappen.vm/brilleappen/event/create --data-binary @- <<'EOF'
+{
+	"title": "Oh, no!",
+	"type": "breakdown"
+}
+EOF
 ```

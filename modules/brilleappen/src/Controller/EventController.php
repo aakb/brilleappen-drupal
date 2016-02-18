@@ -37,6 +37,11 @@ class EventController extends ControllerBase {
         'type' => 'gg_event',
         'title' => $data->title,
       ]);
+
+      if (isset($data->type)) {
+        $event->field_gg_type = $data->type;
+      }
+
       $event->save();
 
       $this->sendResponse([
@@ -45,7 +50,6 @@ class EventController extends ControllerBase {
           'absolute' => TRUE,
           'query' => [ '_format' => 'json' ],
         ])->toString(),
-        'add_file_url' => $url = Url::fromRoute('brilleappen.add_file', [ 'event_id' => $event->uuid->value ], [ 'absolute' => true ])->toString(),
       ], 201);
     } catch (\Exception $ex) {
       $this->sendResponse([ 'status' => 'ERROR', 'message' => $ex->getMessage(), 'type' => get_class($ex) ], 400);
@@ -283,7 +287,7 @@ class EventController extends ControllerBase {
 
   private function sendResponse($data, $code = 200) {
     http_response_code($code);
-    echo json_encode($data);
+    echo json_encode($data, JSON_UNESCAPED_SLASHES);
     exit;
   }
 }
