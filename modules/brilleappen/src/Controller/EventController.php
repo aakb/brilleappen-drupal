@@ -286,8 +286,13 @@ class EventController extends ControllerBase {
   }
 
   private function sendResponse($data, $code = 200) {
+    $response = json_encode($data, JSON_UNESCAPED_SLASHES);
     http_response_code($code);
-    echo json_encode($data, JSON_UNESCAPED_SLASHES);
+    header('Content-type: application/json');
+    echo $response;
+
+    \Drupal::logger('brilleappen')->notice(json_encode([ 'code' => $code, 'data' => $data ], JSON_UNESCAPED_SLASHES));
+
     exit;
   }
 }
