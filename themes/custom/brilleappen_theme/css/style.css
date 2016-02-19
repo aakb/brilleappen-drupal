@@ -1,3 +1,88 @@
+/**
+ *
+ * ITK box list
+ *
+ * A component for content boxes
+ *
+ */
+/* Variables
+   ========================================================================== */
+/* Basic styling
+   ========================================================================== */
+.itk-boxlist {
+  margin-bottom: 1em; }
+  .itk-boxlist--item {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em; }
+    .itk-boxlist--item figure {
+      display: none; }
+    @media only screen and (min-width: 30em) {
+      .itk-boxlist--item {
+        border: 1px solid #ccc;
+        padding-top: 0;
+        padding-bottom: 0; }
+        .itk-boxlist--item header {
+          order: 2;
+          padding: 1em;
+          -webkit-flex-grow: 1;
+          flex-grow: 1;
+          -webkit-flex-shrink: 1;
+          flex-shrink: 1; }
+        .itk-boxlist--item figure {
+          order: 1;
+          display: block;
+          height: 200px;
+          -webkit-flex-basis: 200px;
+          flex-basis: 200px;
+          -webkit-flex-grow: 0;
+          flex-grow: 0; } }
+  .itk-boxlist--metadata {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    -webkit-justify-content: space-between;
+    justify-content: space-between; }
+  .itk-boxlist--header {
+    margin-top: 0;
+    margin-bottom: 0; }
+  .itk-boxlist--type, .itk-boxlist--date, .itk-boxlist--time, .itk-boxlist--location {
+    color: white; }
+  .itk-boxlist--date, .itk-boxlist--time, .itk-boxlist--location {
+    padding: .25em;
+    width: 30%;
+    background: cadetblue;
+    font-size: 85%;
+    text-align: center;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box; }
+    @media only screen and (min-width: 30em) {
+      .itk-boxlist--date, .itk-boxlist--time, .itk-boxlist--location {
+        padding: .5em; } }
+
+/* Variants
+   ========================================================================== */
+@media only screen and (min-width: 60em) {
+  .itk-boxlist.is-side-by-side {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    -webkit-justify-content: space-between;
+    justify-content: space-between; }
+    .itk-boxlist.is-side-by-side .itk-boxlist--item {
+      margin-right: 1em;
+      margin-bottom: 0; }
+      .itk-boxlist.is-side-by-side .itk-boxlist--item:last-child {
+        margin-right: 0; } }
+
 img, video {
   max-width: 100%; }
 
@@ -17,5 +102,20 @@ img, video {
   @media (max-width: 600px) {
     .gg-event .view-gg-event-media .view-content > div {
       width: 50%; } }
+
+.gg-event {
+  float: left; }
+
+.gg-event-content, .gg-event-media {
+  width: 49%;
+  margin-left: 1%;
+  float: left; }
+
+.gg-event-qr figure {
+  margin: 0;
+  padding: 0; }
+
+#block-brilleappen-theme-login {
+  float: left; }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,42 +1,38 @@
 <div class="gg-event">
-  {{ content }}
 
-  {#
-  <section>
-    <header>{{ 'Captions' | t }}</header>
+  <div class="gg-event-content">
+    <div{{ author_attributes.addClass('node__submitted') }}>
+      {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+      {{ metadata }}
+    </div>
+    <div class="gg-event-body">
+      {{ content.body }}
+    </div>
+    <div class="gg-event-map">
+      {{ content.field_gg_geolocation }}
+    </div>
+    <div class="gg-event-qr">
+      <figure>
+        <a href="{{ qr_code.data_uri }}">
+          <img src="{{ qr_code.data_uri }}" alt="{{ qr_code.data_text }}"/>
+        </a>
+      </figure>
+    </div>
 
-    <dl>
-      {% if node.field_gg_instagram_caption.value is not empty %}
-        <dt>Instagram</dt>
-        <dd>{{ node.field_gg_instagram_caption.value }}</dd>
-      {% endif %}
+    {% if events is not empty %}
+      <ul>
+        {% for child in events %}
+          <li><a href="{{ path('entity.node.canonical', {'node': child.fields.nid.value}) }}">{{ child.fields.title.value }}</a></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
 
-      {% if node.field_gg_twitter_caption.value is not empty %}
-        <dt>Twitter</dt>
-        <dd>{{ node.field_gg_twitter_caption.value }}</dd>
-      {% endif %}
-    </dl>
-  </section>
-  #}
-
-  <figure>
-    <a href="{{ qr_code.data_uri }}">
-      <img src="{{ qr_code.data_uri }}" alt="{{ qr_code.data_text }}"/>
-    </a>
-  </figure>
-
-  <div class="media">
+  <div class="gg-event-media">
     <h2>{{ 'Media' | t }}</h2>
     {% spaceless %}
     {{ event_media_view }}
     {% endspaceless %}
   </div>
 
-  {% if events is not empty %}
-    <ul>
-      {% for child in events %}
-        <li><a href="{{ path('entity.node.canonical', {'node': child.fields.nid.value}) }}">{{ child.fields.title.value }}</a></li>
-      {% endfor %}
-    </ul>
-  {% endif %}
 </div>

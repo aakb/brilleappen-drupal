@@ -1,4 +1,5 @@
 @import 'compass/css3';
+@import '_itk-boxlist.scss';
 
 img, video {
 	max-width: 100%;
@@ -25,4 +26,25 @@ img, video {
 	@media (max-width: 600px) {
 		width: 50%;
 	}
+}
+
+.gg-event {
+  float: left;
+}
+
+.gg-event-content, .gg-event-media {
+  width: 49%;
+  margin-left: 1%;
+  float: left;
+}
+
+.gg-event-qr {
+  figure {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+#block-brilleappen-theme-login {
+  float: left;
 }
