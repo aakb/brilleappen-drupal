@@ -52,4 +52,3 @@
 *.phar    -text diff
 *.exe     -text diff
 *.ttf     -text diff
-*.dat			-text diff
