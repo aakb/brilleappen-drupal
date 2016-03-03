@@ -118,4 +118,26 @@ img, video {
 #block-brilleappen-theme-login {
   float: left; }
 
+/* Menus
+   ========================================================================== */
+.gg-menu {
+  margin: 0;
+  padding: 0; }
+  .gg-menu li {
+    float: left;
+    list-style: none;
+    margin: 0 2em 2em 0; }
+  .gg-menu a {
+    color: black;
+    font-size: 1.5em;
+    padding-bottom: 0.2em; }
+    .gg-menu a.is-active, .gg-menu a:active, .gg-menu a:hover, .gg-menu a:focus {
+      text-decoration: none;
+      border-bottom: 2px solid black; }
+
+.geolocation-common-map-container {
+  height: 600px;
+  width: 100%;
+  display: none; }
+
 /*# sourceMappingURL=style.css.map */
