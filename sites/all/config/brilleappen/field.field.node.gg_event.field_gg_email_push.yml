@@ -1,0 +1,23 @@
+uuid: e7d5f7d6-4cd6-46df-b941-65372b34410b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_gg_email_push
+    - node.type.gg_event
+id: node.gg_event.field_gg_email_push
+field_name: field_gg_email_push
+entity_type: node
+bundle: gg_event
+label: Email
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Send email'
+  off_label: 'Off'
+field_type: boolean

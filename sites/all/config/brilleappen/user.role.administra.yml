@@ -1,0 +1,50 @@
+uuid: f46a85a9-257f-4705-b75d-9355d188e3ad
+langcode: en
+status: true
+dependencies: {  }
+id: administra
+label: Administrator
+weight: 2
+is_admin: null
+permissions:
+  - 'administer blocks'
+  - 'administer display modes'
+  - 'administer node display'
+  - 'administer node fields'
+  - 'administer node form display'
+  - 'administer user display'
+  - 'administer user fields'
+  - 'administer user form display'
+  - 'access files overview'
+  - 'administer filters'
+  - 'administer imce'
+  - 'access content overview'
+  - 'administer nodes'
+  - 'administer content types'
+  - 'bypass node access'
+  - 'delete all revisions'
+  - 'revert all revisions'
+  - 'view all revisions'
+  - 'view own unpublished content'
+  - 'access content'
+  - 'administer menu'
+  - 'administer modules'
+  - 'administer site configuration'
+  - 'administer software updates'
+  - 'administer themes'
+  - 'link to any page'
+  - 'access administration pages'
+  - 'access site in maintenance mode'
+  - 'access site reports'
+  - 'view the administration theme'
+  - 'administer account settings'
+  - 'administer permissions'
+  - 'administer users'
+  - 'cancel account'
+  - 'change own username'
+  - 'select account cancellation method'
+  - 'access user profiles'
+  - 'administer rest resources'
+  - 'access toolbar'
+  - 'administer image styles'
+  - 'administer views'

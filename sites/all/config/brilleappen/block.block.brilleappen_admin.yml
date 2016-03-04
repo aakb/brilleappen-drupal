@@ -1,0 +1,26 @@
+uuid: 5c760a0f-6a5d-4d90-ad0b-11f3fbe628d5
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.admin
+  module:
+    - system
+  theme:
+    - brilleappen
+_core:
+  default_config_hash: DWAB7HaAfAJerAmyT8B2K-6qxicu9n0PcKVpDr--N4c
+id: brilleappen_admin
+theme: brilleappen
+region: '-1'
+weight: -2
+provider: null
+plugin: 'system_menu_block:admin'
+settings:
+  id: 'system_menu_block:admin'
+  label: Administration
+  provider: system
+  label_display: visible
+  level: 1
+  depth: 0
+visibility: {  }

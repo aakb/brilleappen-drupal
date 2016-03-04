@@ -1,0 +1,22 @@
+uuid: bcd9c31a-21c2-4726-b800-e7fbed53d468
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+  theme:
+    - brilleappen_theme
+_core:
+  default_config_hash: 4QlSnWBcxxKMIFRM8sbu_MjSkcp3NjGgnVrc-lynQHI
+id: brilleappen_theme_login
+theme: brilleappen_theme
+region: header
+weight: -4
+provider: null
+plugin: user_login_block
+settings:
+  id: user_login_block
+  label: 'User login'
+  provider: user
+  label_display: visible
+visibility: {  }

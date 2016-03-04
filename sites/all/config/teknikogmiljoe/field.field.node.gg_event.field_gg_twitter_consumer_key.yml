@@ -1,0 +1,19 @@
+uuid: 8ab1bb9e-8370-48cf-a73c-60cfdcfbd835
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_gg_twitter_consumer_key
+    - node.type.gg_event
+id: node.gg_event.field_gg_twitter_consumer_key
+field_name: field_gg_twitter_consumer_key
+entity_type: node
+bundle: gg_event
+label: 'Consumer key'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

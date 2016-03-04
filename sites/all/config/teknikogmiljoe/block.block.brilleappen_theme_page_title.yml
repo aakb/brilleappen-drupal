@@ -1,0 +1,20 @@
+uuid: 25bab7ee-bb38-4496-a100-af83e7f1e0b6
+langcode: en
+status: true
+dependencies:
+  theme:
+    - brilleappen_theme
+_core:
+  default_config_hash: 8yptDf6WrXxeyevUz4nP5vfr7BtxQqCBMninhV2IJ1g
+id: brilleappen_theme_page_title
+theme: brilleappen_theme
+region: content
+weight: -4
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  provider: core
+  label_display: '0'
+visibility: {  }

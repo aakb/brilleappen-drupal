@@ -1,0 +1,21 @@
+uuid: 6230d080-826a-4687-a905-5e4363b52daa
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_gg_type
+field_name: field_gg_type
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

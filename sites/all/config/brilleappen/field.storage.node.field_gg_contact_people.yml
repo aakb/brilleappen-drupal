@@ -1,0 +1,19 @@
+uuid: 23ff4698-0a0d-4d43-9409-0932fbb07bb1
+langcode: en
+status: true
+dependencies:
+  module:
+    - brilleappen
+    - node
+id: node.field_gg_contact_people
+field_name: field_gg_contact_people
+entity_type: node
+type: brilleappen_contact_person
+settings: {  }
+module: brilleappen
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,23 @@
+uuid: 359b20a5-b0f6-4959-b404-4dae1fe5fc7d
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.gg_media.field_gg_data
+    - field.field.node.gg_media.field_gg_event
+    - field.field.node.gg_media.field_gg_file
+    - node.type.gg_media
+  module:
+    - user
+id: node.gg_media.teaser
+targetEntityType: node
+bundle: gg_media
+mode: teaser
+content:
+  links:
+    weight: 100
+hidden:
+  field_gg_data: true
+  field_gg_event: true
+  field_gg_file: true

@@ -1,0 +1,32 @@
+uuid: eeea9b74-ace6-4e96-9b00-a23fd53acaa2
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.gg_event_media
+  module:
+    - node
+    - views
+  theme:
+    - seven
+id: views_block__gg_event_media_gg_event_media
+theme: seven
+region: content
+weight: -1
+provider: null
+plugin: 'views_block:gg_event_media-gg_event_media'
+settings:
+  id: 'views_block:gg_event_media-gg_event_media'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      gg_event: gg_event
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

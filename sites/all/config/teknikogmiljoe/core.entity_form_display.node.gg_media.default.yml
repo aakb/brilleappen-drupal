@@ -1,0 +1,57 @@
+uuid: fddb0989-f3da-4bdb-ba00-b6db6d9523bb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.gg_media.field_gg_data
+    - field.field.node.gg_media.field_gg_event
+    - field.field.node.gg_media.field_gg_file
+    - node.type.gg_media
+  module:
+    - file
+id: node.gg_media.default
+targetEntityType: node
+bundle: gg_media
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+  field_gg_data:
+    weight: 5
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+  field_gg_event:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+  field_gg_file:
+    weight: 3
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+  title:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 1
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  promote: true
+  sticky: true

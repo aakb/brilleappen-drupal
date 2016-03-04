@@ -1,0 +1,19 @@
+uuid: 41fda9c5-ce8c-41a7-a027-3940bf0dd8f3
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_gg_email_recipients
+field_name: field_gg_email_recipients
+entity_type: node
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

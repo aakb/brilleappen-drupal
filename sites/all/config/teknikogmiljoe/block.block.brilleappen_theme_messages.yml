@@ -1,0 +1,22 @@
+uuid: 0e957dca-282b-4932-a428-403427f5ad40
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - brilleappen_theme
+_core:
+  default_config_hash: 5MNdk3fpMKx_xxBTcz2T11DL4XEU1H5SgHl8BsYdFsA
+id: brilleappen_theme_messages
+theme: brilleappen_theme
+region: content
+weight: 0
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

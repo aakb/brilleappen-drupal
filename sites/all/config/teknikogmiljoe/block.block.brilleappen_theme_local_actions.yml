@@ -1,0 +1,20 @@
+uuid: 96ec1fb2-60aa-478c-963a-5863758f040c
+langcode: en
+status: true
+dependencies:
+  theme:
+    - brilleappen_theme
+_core:
+  default_config_hash: PffmQ-ABSz5tFjWmVsR7NesunDnEivvopnJnBjl8KNE
+id: brilleappen_theme_local_actions
+theme: brilleappen_theme
+region: content
+weight: -3
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  provider: core
+  label_display: '0'
+visibility: {  }

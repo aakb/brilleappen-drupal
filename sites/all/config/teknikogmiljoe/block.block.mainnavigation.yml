@@ -1,0 +1,24 @@
+uuid: 128337d8-2069-4a3e-a747-71b1e758d9d9
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - brilleappen_theme
+id: mainnavigation
+theme: brilleappen_theme
+region: header
+weight: -5
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility: {  }

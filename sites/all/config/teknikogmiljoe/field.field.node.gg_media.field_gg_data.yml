@@ -1,0 +1,19 @@
+uuid: b10902bd-8204-4d47-b100-ad0a46b27353
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_gg_data
+    - node.type.gg_media
+id: node.gg_media.field_gg_data
+field_name: field_gg_data
+entity_type: node
+bundle: gg_media
+label: Data
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

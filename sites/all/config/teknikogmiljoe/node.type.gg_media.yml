@@ -1,0 +1,11 @@
+uuid: 190275eb-1be9-49e1-b929-415f460d1e30
+langcode: en
+status: true
+dependencies: {  }
+name: Media
+type: gg_media
+description: ''
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

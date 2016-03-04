@@ -1,0 +1,19 @@
+uuid: e9b84d19-e755-4904-a600-de8f7d678c77
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_gg_instagram_caption
+    - node.type.gg_event
+id: node.gg_event.field_gg_instagram_caption
+field_name: field_gg_instagram_caption
+entity_type: node
+bundle: gg_event
+label: Caption
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

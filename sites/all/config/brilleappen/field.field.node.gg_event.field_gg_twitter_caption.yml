@@ -1,0 +1,19 @@
+uuid: 6c4b987b-be4b-4709-be00-0ea64b0c0ccc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_gg_twitter_caption
+    - node.type.gg_event
+id: node.gg_event.field_gg_twitter_caption
+field_name: field_gg_twitter_caption
+entity_type: node
+bundle: gg_event
+label: Caption
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

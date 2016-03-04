@@ -1,0 +1,39 @@
+uuid: 6ea9933f-dbc6-4886-9807-7d64bf07ae51
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.gg_media.field_gg_data
+    - field.field.node.gg_media.field_gg_event
+    - field.field.node.gg_media.field_gg_file
+    - node.type.gg_media
+  module:
+    - file
+    - user
+id: node.gg_media.default
+targetEntityType: node
+bundle: gg_media
+mode: default
+content:
+  field_gg_data:
+    weight: 103
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+  field_gg_event:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_gg_file:
+    weight: 101
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: file_default
+  links:
+    weight: 100
+hidden: {  }

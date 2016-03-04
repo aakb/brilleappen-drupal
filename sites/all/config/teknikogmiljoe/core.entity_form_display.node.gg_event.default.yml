@@ -1,0 +1,127 @@
+uuid: 2d17d11e-c421-4813-9c07-7b9d9aaef656
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.gg_event.body
+    - field.field.node.gg_event.field_gg_contact_people
+    - field.field.node.gg_event.field_gg_email_push
+    - field.field.node.gg_event.field_gg_email_recipients
+    - field.field.node.gg_event.field_gg_geolocation
+    - field.field.node.gg_event.field_gg_instagram_caption
+    - field.field.node.gg_event.field_gg_instagram_password
+    - field.field.node.gg_event.field_gg_instagram_push
+    - field.field.node.gg_event.field_gg_instagram_username
+    - field.field.node.gg_event.field_gg_parent
+    - field.field.node.gg_event.field_gg_twitter_access_secret
+    - field.field.node.gg_event.field_gg_twitter_access_token
+    - field.field.node.gg_event.field_gg_twitter_caption
+    - field.field.node.gg_event.field_gg_twitter_consumer_key
+    - field.field.node.gg_event.field_gg_twitter_consumer_secret
+    - field.field.node.gg_event.field_gg_twitter_push
+    - field.field.node.gg_event.field_gg_type
+    - node.type.gg_event
+  module:
+    - brilleappen
+    - field_group
+    - geolocation
+    - text
+third_party_settings:
+  field_group:
+    group_gg_email:
+      children:
+        - field_gg_email_push
+        - field_gg_email_recipients
+      parent_name: ''
+      weight: 5
+      label: Email
+      format_type: fieldset
+      format_settings:
+        description: ''
+        classes: ''
+        id: ''
+        required_fields: true
+id: node.gg_event.default
+targetEntityType: node
+bundle: gg_event
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 2
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 7
+    settings: {  }
+    third_party_settings: {  }
+  field_gg_contact_people:
+    weight: 8
+    settings: {  }
+    third_party_settings: {  }
+    type: brilleappen_contact_person
+  field_gg_email_push:
+    weight: 34
+    settings:
+      display_label: false
+    third_party_settings: {  }
+    type: boolean_checkbox
+  field_gg_email_recipients:
+    weight: 35
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+  field_gg_geolocation:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: geolocation_googlegeocoder
+  field_gg_parent:
+    weight: 4
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+  field_gg_type:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  title:
+    type: string_textfield
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 6
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  field_gg_instagram_caption: true
+  field_gg_instagram_password: true
+  field_gg_instagram_push: true
+  field_gg_instagram_username: true
+  field_gg_twitter_access_secret: true
+  field_gg_twitter_access_token: true
+  field_gg_twitter_caption: true
+  field_gg_twitter_consumer_key: true
+  field_gg_twitter_consumer_secret: true
+  field_gg_twitter_push: true
+  promote: true
+  sticky: true

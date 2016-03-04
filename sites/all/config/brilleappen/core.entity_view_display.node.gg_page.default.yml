@@ -1,0 +1,24 @@
+uuid: 958aa813-c78a-416c-a803-3ddd59774549
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.gg_page.body
+    - node.type.gg_page
+  module:
+    - text
+    - user
+id: node.gg_page.default
+targetEntityType: node
+bundle: gg_page
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+  links:
+    weight: 100
+hidden: {  }

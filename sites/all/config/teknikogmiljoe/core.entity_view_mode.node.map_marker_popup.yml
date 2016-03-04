@@ -1,0 +1,10 @@
+uuid: c8da70a3-3fd9-46a4-8406-065182dfdb35
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.map_marker_popup
+label: 'Map Marker Popup'
+targetEntityType: node
+cache: true

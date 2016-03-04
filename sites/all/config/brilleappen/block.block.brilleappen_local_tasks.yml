@@ -1,0 +1,22 @@
+uuid: 78e6a967-5d7c-40d8-9000-e80982e91f47
+langcode: en
+status: true
+dependencies:
+  theme:
+    - brilleappen
+_core:
+  default_config_hash: c-06bbElRY5sKmglk74ppgTW93Et4-EJFyNiUZMb8JY
+id: brilleappen_local_tasks
+theme: brilleappen
+region: content
+weight: -2
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }

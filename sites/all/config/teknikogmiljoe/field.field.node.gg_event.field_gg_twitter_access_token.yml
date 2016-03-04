@@ -1,0 +1,19 @@
+uuid: d5b8f2ee-564a-4687-9c06-6f8eaa768e7d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_gg_twitter_access_token
+    - node.type.gg_event
+id: node.gg_event.field_gg_twitter_access_token
+field_name: field_gg_twitter_access_token
+entity_type: node
+bundle: gg_event
+label: 'Access token'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

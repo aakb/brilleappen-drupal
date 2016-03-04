@@ -1,0 +1,27 @@
+uuid: 2c245e41-1a50-4628-a500-aeec809f0d1c
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: dJ0L2DNSj5q6XVZAGsuVDpJTh5UeYkIPwKrUOOpr8YI
+id: authenticated
+label: 'Authenticated user'
+weight: 1
+is_admin: false
+permissions:
+  - 'access content'
+  - 'restful delete entity:node'
+  - 'restful get entity:node'
+  - 'restful patch entity:node'
+  - 'restful post entity:node'
+  - 'view own unpublished content'
+  - 'create gg_event content'
+  - 'delete any gg_event content'
+  - 'delete own gg_event content'
+  - 'delete gg_event revisions'
+  - 'edit any gg_event content'
+  - 'edit own gg_event content'
+  - 'revert gg_event revisions'
+  - 'view gg_event revisions'
+  - 'use text format gg_html'
+  - 'administer rest resources'

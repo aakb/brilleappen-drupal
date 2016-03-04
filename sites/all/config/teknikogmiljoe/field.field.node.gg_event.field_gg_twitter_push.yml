@@ -1,0 +1,23 @@
+uuid: 4e86c45d-d426-4649-8947-71fd2a599639
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_gg_twitter_push
+    - node.type.gg_event
+id: node.gg_event.field_gg_twitter_push
+field_name: field_gg_twitter_push
+entity_type: node
+bundle: gg_event
+label: 'Push to Twitter'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Push to Twitter'
+  off_label: 'Off'
+field_type: boolean

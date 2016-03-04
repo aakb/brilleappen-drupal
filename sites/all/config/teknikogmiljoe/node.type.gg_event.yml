@@ -1,0 +1,11 @@
+uuid: 7c62ada2-d095-4272-a400-e2492a272e62
+langcode: en
+status: true
+dependencies: {  }
+name: Event
+type: gg_event
+description: ''
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: true

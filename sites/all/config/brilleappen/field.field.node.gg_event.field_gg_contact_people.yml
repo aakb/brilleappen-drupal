@@ -1,0 +1,21 @@
+uuid: 1b4e548e-1773-4c10-bb01-1ca533496165
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_gg_contact_people
+    - node.type.gg_event
+  module:
+    - brilleappen
+id: node.gg_event.field_gg_contact_people
+field_name: field_gg_contact_people
+entity_type: node
+bundle: gg_event
+label: 'Contact people'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: brilleappen_contact_person

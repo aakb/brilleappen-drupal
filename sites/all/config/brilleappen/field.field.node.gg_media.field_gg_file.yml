@@ -1,0 +1,27 @@
+uuid: 324509e2-f928-4dde-b75f-958bfb604280
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_gg_file
+    - node.type.gg_media
+  module:
+    - file
+id: node.gg_media.field_gg_file
+field_name: field_gg_file
+entity_type: node
+bundle: gg_media
+label: File
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: ''
+  file_extensions: 'jpg png'
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

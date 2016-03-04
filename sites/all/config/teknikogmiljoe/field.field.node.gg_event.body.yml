@@ -1,0 +1,22 @@
+uuid: 6565ea2f-b30d-4b0a-820c-12f888ad4593
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.gg_event
+  module:
+    - text
+id: node.gg_event.body
+field_name: body
+entity_type: node
+bundle: gg_event
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary
